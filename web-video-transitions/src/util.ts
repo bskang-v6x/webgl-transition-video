@@ -15,3 +15,12 @@ export const getAssets = (video: AssetVideoModel) => {
   }
   return assets;
 };
+
+
+export const TRANSITION = {
+  ING : "전환 효과 진행 중",
+  NOT_ING : "전환 효과 진행 중 아님",
+  VIDEO1 : "원본 영상 1",
+  VIDEO2 : "원본 영상 2",
+  RESULT : "결과 영상",
+}

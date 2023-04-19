@@ -1,6 +1,6 @@
 import { useEffect, useRef, useState } from "react";
 import createShader from "gl-shader";
-import { TRANSITION } from "../util";
+import { TRANSITION, linearInterpolation } from "../util";
 
 const vertexShaderCode = `
 attribute vec2 a_position;
@@ -20,6 +20,9 @@ uniform sampler2D u_texture2;
 uniform float u_time;
 varying vec2 v_texcoord;
 
+uniform vec3 u_color;
+uniform float u_colorPhase;
+
 vec4 getFromColor(vec2 p) {
   return texture2D(u_texture1, p);
 }
@@ -28,11 +31,11 @@ vec4 getToColor(vec2 p) {
   return texture2D(u_texture2, p);
 }
 
-vec4 transition(vec2 uv) {
-  vec2 p=uv.xy/vec2(1.0).xy; // normalize
-  vec4 a=getFromColor(p);
-  vec4 b=getToColor(p);
-  return mix(a, b, step(0.0+p.y,u_time));
+vec4 transition (vec2 uv) {
+  return mix(
+    mix(vec4(u_color, 1.0), getFromColor(uv), smoothstep(1.0-u_colorPhase, 0.0, u_time)),
+    mix(vec4(u_color, 1.0), getToColor(uv), smoothstep(u_colorPhase, 1.0, u_time)),
+    u_time);
 }
 
 void main() {
@@ -40,7 +43,7 @@ void main() {
 }
 `;
 
-const WipeDown2 = ({
+const FadeInOut2 = ({
   width,
   height,
   startVideoSrc,
@@ -77,6 +80,8 @@ const WipeDown2 = ({
         { type: "sampler2D", name: "u_texture1" },
         { type: "sampler2D", name: "u_texture2" },
         { type: "float", name: "u_time" },
+        { type: "vec3", name: "u_color" },
+        { type: "float", name: "u_colorPhase" },
       ],
       [
         { type: "vec2", name: "a_position" },
@@ -212,11 +217,52 @@ const WipeDown2 = ({
       startVideo
     );
 
+    shader.uniforms.u_color = [0, 0, 0];
+    shader.uniforms.u_colorPhase = 0.4;
+
     if (startVideo.duration - startVideo.currentTime < duration / 2) {
-      endVideo.play();
       setIsTransition(true);
       timeStampRef.current = timeStampRef.current || performance.now();
-      timeRef.current = (deltaTime - timeStampRef.current) / (duration * 1000);
+
+      const t = Math.min(
+        (deltaTime - timeStampRef.current) / ((duration * 1000) / 2),
+        1
+      );
+      timeRef.current = linearInterpolation(0, 0.5, t);
+      gl.activeTexture(gl.TEXTURE0 + textureUnit2);
+      gl.bindTexture(gl.TEXTURE_2D, texture2);
+      gl.texImage2D(
+        gl.TEXTURE_2D,
+        0,
+        gl.RGBA,
+        gl.RGBA,
+        gl.UNSIGNED_BYTE,
+        endVideo
+      );
+      timeRef.current = timeRef.current > 0.5 ? 0.5 : timeRef.current;
+      shader.uniforms.u_time = timeRef.current;
+    }
+
+    if (startVideo.duration === startVideo.currentTime) {
+      if (endVideo.paused) timeStampRef.current = performance.now();
+      endVideo.play();
+      const t = Math.min(
+        (deltaTime - timeStampRef.current) / ((duration * 1000) / 2),
+        1
+      );
+
+      timeRef.current = linearInterpolation(0.5, 1, t);
+      gl.activeTexture(gl.TEXTURE0 + textureUnit1);
+      gl.bindTexture(gl.TEXTURE_2D, texture1);
+      gl.texImage2D(
+        gl.TEXTURE_2D,
+        0,
+        gl.RGBA,
+        gl.RGBA,
+        gl.UNSIGNED_BYTE,
+        startVideo
+      );
+
       gl.activeTexture(gl.TEXTURE0 + textureUnit2);
       gl.bindTexture(gl.TEXTURE_2D, texture2);
       gl.texImage2D(
@@ -252,7 +298,7 @@ const WipeDown2 = ({
 
   return (
     <>
-      <h1> 아래로 전환 효과입니다 2 </h1>
+      <h1> 페이드 인 아웃입니다 2 </h1>
       {isTransition ? (
         <h1 style={{ color: "blue" }}>{TRANSITION.ING}</h1>
       ) : (
@@ -300,4 +346,4 @@ const WipeDown2 = ({
   );
 };
 
-export default WipeDown2;
+export default FadeInOut2;

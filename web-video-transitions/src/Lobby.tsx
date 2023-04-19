@@ -14,38 +14,41 @@ const Lobby = () => {
       <Link className="button" to="/">
         Home
       </Link>
+      <Link className="button" to="/fade-in-out">
+        페이드 인 아웃
+      </Link>
       <Link className="button" to="/dissolve">
-        Dissolve
+        디졸브
       </Link>
       <Link className="button" to="/wave">
-        wave
+        파도
       </Link>
       <Link className="button" to="/pong">
-        Pong
+        퐁당
       </Link>
       <Link className="button" to="/window-slice">
-        Window Slice
+        윈도우 슬라이스
       </Link>
       <Link className="button" to="/wipe-right">
-        Wipe Right
+        오른쪽 전환
       </Link>
       <Link className="button" to="/wipe-left">
-        Wipe Left
+        왼쪽 전환
       </Link>
       <Link className="button" to="/wipe-up">
-        Wipe Up
+        위로 전환
       </Link>
       <Link className="button" to="/wipe-down">
-        Wipe Down
+        아래로 전환
       </Link>
       <Link className="button" to="/directional-warp">
-        Directional Warp
+        대각선 물결
       </Link>
       <Link className="button" to="/mosaic">
-        Mosaic
+        모자이크
       </Link>
       <Link className="button" to="/cube">
-        Cube
+        큐브
       </Link>
     </div>
   );

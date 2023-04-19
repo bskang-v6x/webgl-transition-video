@@ -20,6 +20,9 @@ uniform sampler2D u_texture2;
 uniform float u_time;
 varying vec2 v_texcoord;
 
+uniform vec3 u_color;
+uniform float u_colorPhase;
+
 vec4 getFromColor(vec2 p) {
   return texture2D(u_texture1, p);
 }
@@ -28,11 +31,11 @@ vec4 getToColor(vec2 p) {
   return texture2D(u_texture2, p);
 }
 
-vec4 transition(vec2 uv) {
-  vec2 p=uv.xy/vec2(1.0).xy; // normalize
-  vec4 a=getFromColor(p);
-  vec4 b=getToColor(p);
-  return mix(a, b, step(0.0+p.y,u_time));
+vec4 transition (vec2 uv) {
+  return mix(
+    mix(vec4(u_color, 1.0), getFromColor(uv), smoothstep(1.0-u_colorPhase, 0.0, u_time)),
+    mix(vec4(u_color, 1.0), getToColor(uv), smoothstep(u_colorPhase, 1.0, u_time)),
+    u_time);
 }
 
 void main() {
@@ -40,7 +43,7 @@ void main() {
 }
 `;
 
-const WipeDown2 = ({
+const FadeInOut = ({
   width,
   height,
   startVideoSrc,
@@ -77,6 +80,8 @@ const WipeDown2 = ({
         { type: "sampler2D", name: "u_texture1" },
         { type: "sampler2D", name: "u_texture2" },
         { type: "float", name: "u_time" },
+        { type: "vec3", name: "u_color" },
+        { type: "float", name: "u_colorPhase" },
       ],
       [
         { type: "vec2", name: "a_position" },
@@ -212,10 +217,14 @@ const WipeDown2 = ({
       startVideo
     );
 
-    if (startVideo.duration - startVideo.currentTime < duration / 2) {
+    shader.uniforms.u_color = [0, 0, 0];
+    shader.uniforms.u_colorPhase = 0.4;
+
+    if (startVideo.duration - startVideo.currentTime < duration) {
       endVideo.play();
       setIsTransition(true);
       timeStampRef.current = timeStampRef.current || performance.now();
+
       timeRef.current = (deltaTime - timeStampRef.current) / (duration * 1000);
       gl.activeTexture(gl.TEXTURE0 + textureUnit2);
       gl.bindTexture(gl.TEXTURE_2D, texture2);
@@ -241,7 +250,7 @@ const WipeDown2 = ({
     requestAnimationFrame(render);
   };
 
-  const onLoadedMetadata = () => {
+  const onLoadedMetaData = () => {
     if (!startVideoRef.current) return;
     const startVideo = startVideoRef.current;
     startVideo.currentTime =
@@ -252,7 +261,7 @@ const WipeDown2 = ({
 
   return (
     <>
-      <h1> 아래로 전환 효과입니다 2 </h1>
+      <h1>페이드 인 아웃입니다</h1>
       {isTransition ? (
         <h1 style={{ color: "blue" }}>{TRANSITION.ING}</h1>
       ) : (
@@ -274,7 +283,7 @@ const WipeDown2 = ({
             style={{ display: "block" }}
             width={width / 2}
             height={height / 2}
-            onLoadedMetadata={onLoadedMetadata}
+            onLoadedMetadata={onLoadedMetaData}
           ></video>
         </div>
         <div>
@@ -300,4 +309,4 @@ const WipeDown2 = ({
   );
 };
 
-export default WipeDown2;
+export default FadeInOut;

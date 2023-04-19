@@ -1,5 +1,6 @@
 import { useEffect, useRef, useState } from "react";
 import createShader from "gl-shader";
+import { TRANSITION } from "../util";
 
 const vertexShaderCode = `
 attribute vec2 a_position;
@@ -227,11 +228,12 @@ const WipeLeft = ({
         endVideo
       );
       timeRef.current = timeRef.current > 1 ? 1 : timeRef.current;
+      if (timeRef.current === 1) setIsTransition(false);
       shader.uniforms.u_time = timeRef.current;
     }
 
     gl.drawArrays(gl.TRIANGLE_STRIP, 0, 4);
-    if (endVideo.duration === endVideo.currentTime) {
+    if (endVideo.duration <= endVideo.currentTime || endVideo.currentTime > 5) {
       setIsTransition(false);
       endVideo.pause();
       return;
@@ -239,19 +241,22 @@ const WipeLeft = ({
     requestAnimationFrame(render);
   };
 
-  useEffect(() => {
+  const onLoadedMetaData = () => {
     if (!startVideoRef.current) return;
+    const startVideo = startVideoRef.current;
+    startVideo.currentTime =
+      startVideo.duration > 5 ? startVideo.duration - 5 : 0;
     startVideoRef.current.play();
     requestAnimationFrame(render);
-  }, []);
+  };
 
   return (
     <>
-      <h1> WipeLeft Transition </h1>
+      <h1> 왼쪽으로 전환 효과입니다. </h1>
       {isTransition ? (
-        <h1 style={{ color: "blue" }}>transition start</h1>
+        <h1 style={{ color: "blue" }}>{TRANSITION.ING}</h1>
       ) : (
-        <h1 style={{ color: "red" }}>not transition</h1>
+        <h1 style={{ color: "red" }}>{TRANSITION.NOT_ING}</h1>
       )}
       <div
         style={{
@@ -261,25 +266,30 @@ const WipeLeft = ({
         }}
       >
         <div>
-          <h3>video 1</h3>
+          <h3>{TRANSITION.VIDEO1}</h3>
           <video
             ref={startVideoRef}
             src={startVideoSrc}
             muted
             style={{ display: "block" }}
+            width={width / 2}
+            height={height / 2}
+            onLoadedMetadata={onLoadedMetaData}
           ></video>
         </div>
         <div>
-          <h3>video 2</h3>
+          <h3>{TRANSITION.VIDEO2}</h3>
           <video
             ref={endVideoRef}
             src={endVideoSrc}
             muted
             style={{ display: "block" }}
+            width={width / 2}
+            height={height / 2}
           ></video>
         </div>
       </div>
-      <h1>result</h1>
+      <h1>{TRANSITION.RESULT}</h1>
       <canvas
         ref={canvasRef}
         width={width}
