@@ -4,11 +4,13 @@ const Lobby = () => {
   return (
     <div
       style={{
+        marginTop: "auto",
         display: "flex",
         flexDirection: "column",
         alignContent: "center",
         justifyContent: "center",
-        gap: "30px",
+        gap: "10px",
+        marginBottom: "10px",
       }}
     >
       <Link className="button" to="/">

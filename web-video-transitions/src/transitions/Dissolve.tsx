@@ -241,12 +241,7 @@ const Dissolve = ({
 
   return (
     <>
-      <h1>디졸브 효과입니다</h1>
-      {isTransition ? (
-        <h1 style={{ color: "blue" }}>{TRANSITION.ING}</h1>
-      ) : (
-        <h1 style={{ color: "red" }}>{TRANSITION.NOT_ING}</h1>
-      )}
+      <h2>디졸브 효과입니다</h2>
       <div
         style={{
           display: "flex",
@@ -278,7 +273,12 @@ const Dissolve = ({
           ></video>
         </div>
       </div>
-      <h1>{TRANSITION.RESULT}</h1>
+      <h2>{TRANSITION.RESULT}</h2>
+      {isTransition ? (
+        <h3 style={{ color: "blue" }}>{TRANSITION.ING}</h3>
+      ) : (
+        <h3 style={{ color: "red" }}>{TRANSITION.NOT_ING}</h3>
+      )}
       <canvas
         ref={canvasRef}
         width={width}

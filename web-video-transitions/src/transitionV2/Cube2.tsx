@@ -359,12 +359,7 @@ const Cube2 = ({
 
   return (
     <>
-      <h1> 큐브로 전환입니다. 2 </h1>
-      {isTransition ? (
-        <h1 style={{ color: "blue" }}>{TRANSITION.ING}</h1>
-      ) : (
-        <h1 style={{ color: "red" }}>{TRANSITION.NOT_ING}</h1>
-      )}
+      <h3> 큐브로 전환입니다. 2 </h3>
       <div
         style={{
           display: "flex",
@@ -396,7 +391,12 @@ const Cube2 = ({
           ></video>
         </div>
       </div>
-      <h1>{TRANSITION.RESULT}</h1>
+      <h2>{TRANSITION.RESULT}</h2>
+      {isTransition ? (
+        <h3 style={{ color: "blue" }}>{TRANSITION.ING}</h3>
+      ) : (
+        <h3 style={{ color: "red" }}>{TRANSITION.NOT_ING}</h3>
+      )}
       <canvas
         ref={canvasRef}
         width={width}

@@ -33,22 +33,26 @@ interface Props {
 
 const Gallery = ({ video1, video2 }: Props) => {
   const duration = 1;
+  const width = window.innerWidth / 2;
+  const height = window.innerHeight / 2;
 
   return (
-    <div style={{ display: "flex", justifyContent: "center", gap: "30px" }}>
+    <div
+      style={{
+        display: "flex",
+        justifyContent: "center",
+        gap: "30px",
+      }}
+    >
       <Lobby />
       <div>
-        <h3>제대로 작동하지 않는다면, 새로고침 해보세요.</h3>
-        <button className="button" onClick={() => (window.location.href = "/")}>
-          Reset
-        </button>
         <Routes>
           <Route
             path="/fade-in-out"
             element={
               <FadeInOut
-                width={1280}
-                height={640}
+                width={width}
+                height={height}
                 startVideoSrc={video1}
                 endVideoSrc={video2}
                 duration={duration}
@@ -59,8 +63,8 @@ const Gallery = ({ video1, video2 }: Props) => {
             path="/fade-in-out2"
             element={
               <FadeInOut2
-                width={1280}
-                height={640}
+                width={width}
+                height={height}
                 startVideoSrc={video1}
                 endVideoSrc={video2}
                 duration={duration}
@@ -71,8 +75,8 @@ const Gallery = ({ video1, video2 }: Props) => {
             path="/dissolve"
             element={
               <Dissolve
-                width={1280}
-                height={640}
+                width={width}
+                height={height}
                 startVideoSrc={video1}
                 endVideoSrc={video2}
                 duration={duration}
@@ -83,8 +87,8 @@ const Gallery = ({ video1, video2 }: Props) => {
             path="/wave"
             element={
               <Wave
-                width={1280}
-                height={640}
+                width={width}
+                height={height}
                 startVideoSrc={video1}
                 endVideoSrc={video2}
                 duration={duration}
@@ -95,8 +99,8 @@ const Gallery = ({ video1, video2 }: Props) => {
             path="/pong"
             element={
               <Pong
-                width={1280}
-                height={640}
+                width={width}
+                height={height}
                 startVideoSrc={video1}
                 endVideoSrc={video2}
                 duration={duration}
@@ -107,8 +111,8 @@ const Gallery = ({ video1, video2 }: Props) => {
             path="/window-slice"
             element={
               <WindowSlice
-                width={1280}
-                height={640}
+                width={width}
+                height={height}
                 startVideoSrc={video1}
                 endVideoSrc={video2}
                 duration={duration}
@@ -119,8 +123,8 @@ const Gallery = ({ video1, video2 }: Props) => {
             path="/wipe-right"
             element={
               <WipeRight
-                width={1280}
-                height={640}
+                width={width}
+                height={height}
                 startVideoSrc={video1}
                 endVideoSrc={video2}
                 duration={duration}
@@ -131,8 +135,8 @@ const Gallery = ({ video1, video2 }: Props) => {
             path="/wipe-left"
             element={
               <WipeLeft
-                width={1280}
-                height={640}
+                width={width}
+                height={height}
                 startVideoSrc={video1}
                 endVideoSrc={video2}
                 duration={duration}
@@ -143,8 +147,8 @@ const Gallery = ({ video1, video2 }: Props) => {
             path="/wipe-up"
             element={
               <WipeUp
-                width={1280}
-                height={640}
+                width={width}
+                height={height}
                 startVideoSrc={video1}
                 endVideoSrc={video2}
                 duration={duration}
@@ -155,8 +159,8 @@ const Gallery = ({ video1, video2 }: Props) => {
             path="/wipe-down"
             element={
               <WipeDown
-                width={1280}
-                height={640}
+                width={width}
+                height={height}
                 startVideoSrc={video1}
                 endVideoSrc={video2}
                 duration={duration}
@@ -167,8 +171,8 @@ const Gallery = ({ video1, video2 }: Props) => {
             path="/directional-warp"
             element={
               <DirectionalWarp
-                width={1280}
-                height={640}
+                width={width}
+                height={height}
                 startVideoSrc={video1}
                 endVideoSrc={video2}
                 duration={duration}
@@ -179,8 +183,8 @@ const Gallery = ({ video1, video2 }: Props) => {
             path="/mosaic"
             element={
               <Mosaic
-                width={1280}
-                height={640}
+                width={width}
+                height={height}
                 startVideoSrc={video1}
                 endVideoSrc={video2}
                 duration={duration}
@@ -191,8 +195,8 @@ const Gallery = ({ video1, video2 }: Props) => {
             path="/cube"
             element={
               <Cube
-                width={1280}
-                height={640}
+                width={width}
+                height={height}
                 startVideoSrc={video1}
                 endVideoSrc={video2}
                 duration={duration}
@@ -203,8 +207,8 @@ const Gallery = ({ video1, video2 }: Props) => {
             path="/dissolve2"
             element={
               <Dissolve2
-                width={1280}
-                height={640}
+                width={width}
+                height={height}
                 startVideoSrc={video1}
                 endVideoSrc={video2}
                 duration={duration}
@@ -215,8 +219,8 @@ const Gallery = ({ video1, video2 }: Props) => {
             path="/wave2"
             element={
               <Wave2
-                width={1280}
-                height={640}
+                width={width}
+                height={height}
                 startVideoSrc={video1}
                 endVideoSrc={video2}
                 duration={duration}
@@ -227,8 +231,8 @@ const Gallery = ({ video1, video2 }: Props) => {
             path="/pong2"
             element={
               <Pong2
-                width={1280}
-                height={640}
+                width={width}
+                height={height}
                 startVideoSrc={video1}
                 endVideoSrc={video2}
                 duration={duration}
@@ -239,8 +243,8 @@ const Gallery = ({ video1, video2 }: Props) => {
             path="/window-slice2"
             element={
               <WindowSlice2
-                width={1280}
-                height={640}
+                width={width}
+                height={height}
                 startVideoSrc={video1}
                 endVideoSrc={video2}
                 duration={duration}
@@ -251,8 +255,8 @@ const Gallery = ({ video1, video2 }: Props) => {
             path="/wipe-right2"
             element={
               <WipeRight2
-                width={1280}
-                height={640}
+                width={width}
+                height={height}
                 startVideoSrc={video1}
                 endVideoSrc={video2}
                 duration={duration}
@@ -263,8 +267,8 @@ const Gallery = ({ video1, video2 }: Props) => {
             path="/wipe-left2"
             element={
               <WipeLeft2
-                width={1280}
-                height={640}
+                width={width}
+                height={height}
                 startVideoSrc={video1}
                 endVideoSrc={video2}
                 duration={duration}
@@ -275,8 +279,8 @@ const Gallery = ({ video1, video2 }: Props) => {
             path="/wipe-up2"
             element={
               <WipeUp2
-                width={1280}
-                height={640}
+                width={width}
+                height={height}
                 startVideoSrc={video1}
                 endVideoSrc={video2}
                 duration={duration}
@@ -287,8 +291,8 @@ const Gallery = ({ video1, video2 }: Props) => {
             path="/wipe-down2"
             element={
               <WipeDown2
-                width={1280}
-                height={640}
+                width={width}
+                height={height}
                 startVideoSrc={video1}
                 endVideoSrc={video2}
                 duration={duration}
@@ -299,8 +303,8 @@ const Gallery = ({ video1, video2 }: Props) => {
             path="/directional-warp2"
             element={
               <DirectionalWarp2
-                width={1280}
-                height={640}
+                width={width}
+                height={height}
                 startVideoSrc={video1}
                 endVideoSrc={video2}
                 duration={duration}
@@ -311,8 +315,8 @@ const Gallery = ({ video1, video2 }: Props) => {
             path="/mosaic2"
             element={
               <Mosaic2
-                width={1280}
-                height={640}
+                width={width}
+                height={height}
                 startVideoSrc={video1}
                 endVideoSrc={video2}
                 duration={duration}
@@ -323,8 +327,8 @@ const Gallery = ({ video1, video2 }: Props) => {
             path="/cube2"
             element={
               <Cube2
-                width={1280}
-                height={640}
+                width={width}
+                height={height}
                 startVideoSrc={video1}
                 endVideoSrc={video2}
                 duration={duration}
