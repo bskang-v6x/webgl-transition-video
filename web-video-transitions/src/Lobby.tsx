@@ -16,7 +16,7 @@ const Lobby = () => {
       <Link className="button" to="/">
         Home
       </Link>
-      <Link className="button" to="/fade-in-out">
+      <Link className="button3" to="/fade-in-out">
         페이드 인 아웃
       </Link>
       <Link className="button" to="/dissolve">

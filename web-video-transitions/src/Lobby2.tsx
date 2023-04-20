@@ -21,8 +21,14 @@ const Lobby2 = () => {
       <Link className="button2" to="/">
         Home
       </Link>
-      <Link className="button2" to="/fade-in-out2">
+      <Link className="button3" to="/fade-in-out2">
         페이드 인 아웃 2
+      </Link>
+      <Link className="button3" to="/black-wipe-right2">
+        검정 오른쪽 전환 2
+      </Link>
+      <Link className="button3" to="/black-wipe-down2">
+        검정 아래로 전환 2
       </Link>
       <Link className="button2" to="/dissolve2">
         디졸브 2

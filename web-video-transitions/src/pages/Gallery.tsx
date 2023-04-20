@@ -25,6 +25,8 @@ import Mosaic2 from "../transitionV2/Mosaic2";
 import Cube2 from "../transitionV2/Cube2";
 import FadeInOut2 from "../transitionV2/FadeInOut2";
 import FadeInOut from "../transitions/FadeInOut";
+import BlackWipeRight2 from "../transitionV2/BlackWipeRight2";
+import BlackWipeDown2 from "../transitionV2/BlackWipeDown2";
 
 interface Props {
   video1: string;
@@ -68,6 +70,30 @@ const Gallery = ({ video1, video2 }: Props) => {
                 startVideoSrc={video1}
                 endVideoSrc={video2}
                 duration={duration}
+              />
+            }
+          />
+          <Route
+            path="/black-wipe-right2"
+            element={
+              <BlackWipeRight2
+                width={width}
+                height={height}
+                startVideoSrc={video1}
+                endVideoSrc={video2}
+                duration={2}
+              />
+            }
+          />
+          <Route
+            path="/black-wipe-down2"
+            element={
+              <BlackWipeDown2
+                width={width}
+                height={height}
+                startVideoSrc={video1}
+                endVideoSrc={video2}
+                duration={2}
               />
             }
           />
