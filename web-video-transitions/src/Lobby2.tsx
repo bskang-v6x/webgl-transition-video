@@ -18,6 +18,12 @@ const Lobby2 = () => {
           Dissolve Asset
         </Link>
       )}
+      <Link className="button4" to="/still-cut-dissolve">
+        스틸컷 디졸브
+      </Link>
+      <Link className="button4" to="/still-warp">
+        스틸컷 워프
+      </Link>
       <Link className="button2" to="/">
         Home
       </Link>

@@ -1,5 +1,5 @@
 import Dissolve from "../transitions/Dissolve";
-import { Route, Routes } from "react-router-dom";
+import { Navigate, Route, Routes } from "react-router-dom";
 import Lobby from "../Lobby";
 import Wave from "../transitions/Wave";
 import Pong from "../transitions/Pong";
@@ -27,6 +27,8 @@ import FadeInOut2 from "../transitionV2/FadeInOut2";
 import FadeInOut from "../transitions/FadeInOut";
 import BlackWipeRight2 from "../transitionV2/BlackWipeRight2";
 import BlackWipeDown2 from "../transitionV2/BlackWipeDown2";
+import StillCutDissolve from "../testTransition/StillCutDissolve";
+import StillWarp from "../testTransition/StillWarp";
 
 interface Props {
   video1: string;
@@ -353,6 +355,30 @@ const Gallery = ({ video1, video2 }: Props) => {
             path="/cube2"
             element={
               <Cube2
+                width={width}
+                height={height}
+                startVideoSrc={video1}
+                endVideoSrc={video2}
+                duration={duration}
+              />
+            }
+          />
+          <Route
+            path="/still-cut-dissolve"
+            element={
+              <StillCutDissolve
+                width={width}
+                height={height}
+                startVideoSrc={video1}
+                endVideoSrc={video2}
+                duration={duration}
+              />
+            }
+          />
+          <Route
+            path="/still-warp"
+            element={
+              <StillWarp
                 width={width}
                 height={height}
                 startVideoSrc={video1}
