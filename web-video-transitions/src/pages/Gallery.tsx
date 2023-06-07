@@ -29,6 +29,17 @@ import BlackWipeRight2 from "../transitionV2/BlackWipeRight2";
 import BlackWipeDown2 from "../transitionV2/BlackWipeDown2";
 import StillCutDissolve from "../testTransition/StillCutDissolve";
 import StillWarp from "../testTransition/StillWarp";
+import UTLobby1 from "../UTLobby1";
+import UTLobby2 from "../UTLobby2";
+import StillWave from "../testTransition/StillWave";
+import StillPong from "../testTransition/StillPong";
+import StillWindowSlice from "../testTransition/StillWindowSlice";
+import StillWipeRight from "../testTransition/StillWipeRight";
+import StillWipeLeft from "../testTransition/StillWipeLeft";
+import StillWipeDown from "../testTransition/StillWipeDown";
+import StillWipeUp from "../testTransition/StillWipeUp";
+import StillMosaic from "../testTransition/StillMosaic";
+import StillCube from "../testTransition/StillCube";
 
 interface Props {
   video1: string;
@@ -36,7 +47,7 @@ interface Props {
 }
 
 const Gallery = ({ video1, video2 }: Props) => {
-  const duration = 1;
+  const duration = 0.5;
   const width = window.innerWidth / 2;
   const height = window.innerHeight / 2;
 
@@ -48,7 +59,8 @@ const Gallery = ({ video1, video2 }: Props) => {
         gap: "30px",
       }}
     >
-      <Lobby />
+      <UTLobby1 />
+      <UTLobby2 />
       <div>
         <Routes>
           <Route
@@ -364,7 +376,7 @@ const Gallery = ({ video1, video2 }: Props) => {
             }
           />
           <Route
-            path="/still-cut-dissolve"
+            path="/dissolve-s"
             element={
               <StillCutDissolve
                 width={width}
@@ -376,7 +388,7 @@ const Gallery = ({ video1, video2 }: Props) => {
             }
           />
           <Route
-            path="/still-warp"
+            path="/directional-warp-s"
             element={
               <StillWarp
                 width={width}
@@ -387,9 +399,116 @@ const Gallery = ({ video1, video2 }: Props) => {
               />
             }
           />
+          <Route
+            path="wave-s"
+            element={
+              <StillWave
+                width={width}
+                height={height}
+                startVideoSrc={video1}
+                endVideoSrc={video2}
+                duration={duration}
+              />
+            }
+          />
+          <Route
+            path="pong-s"
+            element={
+              <StillPong
+                width={width}
+                height={height}
+                startVideoSrc={video1}
+                endVideoSrc={video2}
+                duration={duration}
+              />
+            }
+          />
+          <Route
+            path="window-slice-s"
+            element={
+              <StillWindowSlice
+                width={width}
+                height={height}
+                startVideoSrc={video1}
+                endVideoSrc={video2}
+                duration={duration}
+              />
+            }
+          />
+          <Route
+            path="wipe-right-s"
+            element={
+              <StillWipeRight
+                width={width}
+                height={height}
+                startVideoSrc={video1}
+                endVideoSrc={video2}
+                duration={duration}
+              />
+            }
+          />
+          <Route
+            path="wipe-left-s"
+            element={
+              <StillWipeLeft
+                width={width}
+                height={height}
+                startVideoSrc={video1}
+                endVideoSrc={video2}
+                duration={duration}
+              />
+            }
+          />
+          <Route
+            path="wipe-down-s"
+            element={
+              <StillWipeDown
+                width={width}
+                height={height}
+                startVideoSrc={video1}
+                endVideoSrc={video2}
+                duration={duration}
+              />
+            }
+          />
+          <Route
+            path="wipe-up-s"
+            element={
+              <StillWipeUp
+                width={width}
+                height={height}
+                startVideoSrc={video1}
+                endVideoSrc={video2}
+                duration={duration}
+              />
+            }
+          />
+          <Route
+            path="mosaic-s"
+            element={
+              <StillMosaic
+                width={width}
+                height={height}
+                startVideoSrc={video1}
+                endVideoSrc={video2}
+                duration={duration}
+              />
+            }
+          />
+          <Route
+            path="cube-s"
+            element={
+              <StillCube
+                width={width}
+                height={height}
+                startVideoSrc={video1}
+                endVideoSrc={video2}
+                duration={duration}
+              />
+            }
+          />
         </Routes>
       </div>
-      <Lobby2 />
     </div>
   );
 };
