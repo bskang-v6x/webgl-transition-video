@@ -19,22 +19,22 @@ const UTLobby2 = () => {
       <Link className="button" to="/dissolve-s">
         디졸브
       </Link>
-      <Link className="button" to="/wave2">
+      <Link className="button" to="/wave">
         파도
       </Link>
-      <Link className="button" to="/pong2">
+      <Link className="button" to="/pong">
         퐁당
       </Link>
       <Link className="button" to="/window-slice-s">
         윈도우 슬라이스
       </Link>
-      <Link className="button" to="/wipe-right2">
+      <Link className="button" to="/wipe-right">
         오른쪽 전환
       </Link>
-      <Link className="button" to="/wipe-left2">
+      <Link className="button" to="/wipe-left">
         왼쪽 전환
       </Link>
-      <Link className="button" to="/wipe-up2">
+      <Link className="button" to="/wipe-up">
         위로 전환
       </Link>
       <Link className="button" to="/wipe-down-s">
@@ -46,7 +46,7 @@ const UTLobby2 = () => {
       <Link className="button" to="/mosaic-s">
         모자이크
       </Link>
-      <Link className="button" to="/cube2">
+      <Link className="button" to="/cube">
         큐브
       </Link>
     </div>
